@@ -22,17 +22,21 @@ router.get('/total', async (req,res) => {
 
 // Interesting stats
 router.get('/extended', async (req,res) => {
+    // Grab all hamsters from collection
     let hamsters = await db
     .collection('hamsters')
     .get();
 
+    // Create empty array to fill with hamster objects
     let hamsterArr = [];
 
+    // Push each hamsters object from firestore to hamsterArr
     hamsters.forEach(hamster => {
         hamsterArr.push(hamster.data());
     });
 
-    res.send({
+    // Respond with OK and a JSON object containing interesting stats
+    res.status(200).send({
         averageAge: averageAge(hamsterArr),
         favFoods: favFoods(hamsterArr),
         numberOfHamsters: hamsters.size,
