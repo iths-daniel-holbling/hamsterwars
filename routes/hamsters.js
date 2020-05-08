@@ -33,13 +33,15 @@ router.get('/', async (req,res) => {
 // Specific hamster
 router.get('/:id', async (req,res) => {
     // Get hamster from firebase
-    let hamster = await db
+    let hamsters = await db
     .collection('hamsters')
-    .doc(req.params.id)
+    .where("id","==",req.params.id*1)
     .get()
 
-    // Respond with chosen hamster
-    res.status(200).send(hamster.data());
+    hamsters.forEach(hamster => {
+        // Respond with chosen hamster
+        res.status(200).send(hamster.data());
+    })
 })
 
 
@@ -54,10 +56,10 @@ router.post('/', async (req,res) => {
     if(!!req.headers['multiple']){
         // Array of hamster objects, set header key "Multiple" to truthy
         req.body.forEach(async (hamster) => {
-            console.log(`New hamster "${hamster.name}" with id ${hamster.id} created.`)
+            console.log(`New hamster "${hamster.name}" created.`)
             await db
             .collection('hamsters')
-            .doc(hamster.id.toString())
+            .doc()
             .set(hamster)
             .catch(err => console.error(err));
 
@@ -68,10 +70,10 @@ router.post('/', async (req,res) => {
 
     }else{
         // Single hamster
-        console.log(`New hamster ${req.body.name} with id ${req.body.id} created.`)
+        console.log(`New hamster ${req.body.name} created.`)
         await db
         .collection('hamsters')
-        .doc(req.body.id.toString())
+        .doc()
         .set(req.body)
         .catch(err => console.error(err))
     
