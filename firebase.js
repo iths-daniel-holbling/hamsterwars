@@ -9,8 +9,8 @@ const serviceAccount = require("./json/serviceAccount.json");
 // Firebase-admin
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://hamster-wars-daniel.firebaseio.com",
-    storageBucket: "hamster-wars-daniel.appspot.com"
+    databaseURL: process.env.DB_URL,
+    storageBucket: process.env.BUCKET
 });
 
 // Firestore and storage
