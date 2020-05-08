@@ -41,7 +41,7 @@ router.post('/', async (req,res) => {
         .catch(err => console.error(err))
     
         res.status(201).send({
-            msg: `New hamster ${req.body.name} with id ${req.body.id} created.`
+            msg: "New hamster created."
         })
     }
 })
