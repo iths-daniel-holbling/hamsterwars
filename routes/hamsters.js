@@ -14,6 +14,13 @@ const router = new Router();
 
 // POST
 
+// New hamster
+router.post('/', async (req,res) => {
+    await db
+    .collection('hamsters')
+    .doc(req.body.id)
+    .set(req.body)
+})
 
 
 
