@@ -45,7 +45,8 @@ router.post('/', async (req,res) => {
     .doc()
     .set({
         timeStamp: today,
-        contestants: req.body
+        contestants: req.body.contestants,
+        winner: req.body.winner
     })
 
     // Respond with "Game added." to client
@@ -59,5 +60,5 @@ router.post('/', async (req,res) => {
 
 
 
-// EXPORTS
-module.exports = router;
+{// EXPORTS
+module.exports = router;}
