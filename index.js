@@ -19,12 +19,14 @@ app.use(express.static('public'));
 const chartsRoute = require('./routes/charts');
 const gamesRoute = require('./routes/games');
 const hamstersRoute = require('./routes/hamsters');
+const picsRoute = require('./routes/pics');
 const statsRoute = require('./routes/stats');
 
 // ROUTES
 app.use('/charts', chartsRoute);
 app.use('/games', gamesRoute);
 app.use('/hamsters', hamstersRoute);
+app.use('/pics', picsRoute)
 app.use('/stats', statsRoute);
 
 
