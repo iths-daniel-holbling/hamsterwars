@@ -104,6 +104,44 @@ router.post('/', async (req,res) => {
 
 // PUT
 
+// Update a hamsters wins, defeats and number of games
+router.put('/:id/result', async (req,res) => {
+    try {
+        // Declare hamster variable that will be filled with obj from firestore
+        let hamster;
+
+        // Gief hamster with :id
+        let hamsters = await db
+        .collection('hamsters')
+        .where("id","==",req.params.id*1)
+        .get()
+
+        // Loop over the array returned from firestore
+        hamsters.forEach(doc => {
+            // Fill the hamster variable with the retrieved object
+            hamster = doc.data();
+            // Add firebase document id to the hamster-obj
+            hamster.fbId = doc.id;
+        });
+
+        // Generate updateData
+        let updateData = {
+            "wins": (hamster.wins + req.body.wins*1),
+            "defeats": (hamster.defeats + req.body.defeats*1),
+            "games": (hamster.games + 1)
+        }
+
+        // PUT the data
+        await db.collection('hamsters').doc(hamster.fbId).update(updateData);
+
+        // Send "all is ok" to client
+        res.status(200).send({msg:"Hamster updated."})
+
+    }
+    catch(err){
+        console.error(err);
+    }
+})
 
 
 
