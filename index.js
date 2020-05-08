@@ -1,7 +1,6 @@
 // IMPORTS
 const express = require('express');
 require('dotenv').config()
-const { auth, db } = require('./firebase');
 const app = express();
 
 

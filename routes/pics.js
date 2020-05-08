@@ -1,6 +1,6 @@
 // IMPORTS
 const { Router } = require('express');
-const { db, storage } = require('./../firebase');
+const { storage } = require('./../firebase');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
 

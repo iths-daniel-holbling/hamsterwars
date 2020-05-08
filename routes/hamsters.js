@@ -1,6 +1,6 @@
 // IMPORTS
 const { Router } = require('express');
-const { auth, db } = require('./../firebase');
+const { db } = require('./../firebase');
 
 
 
