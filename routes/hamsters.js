@@ -44,6 +44,25 @@ router.get('/:id', async (req,res) => {
     })
 })
 
+// Random hamster
+router.get('/random', async (req,res) => {
+        // Array to perform random on
+        let hamsterArr = [];
+    
+        // Get all hamsters from firebase
+        let hamsters = await db
+        .collection('hamsters')
+        .get();
+    
+        // Push each hamster into array
+        hamsters.forEach(hamster => console.log(hamster.data()));
+    
+    
+        // Return a random hamster
+        res.status(200).send(hamsterArr[Math.floor(Math.random()*hamsterArr.length)]);
+    
+});
+
 
 
 
