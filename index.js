@@ -11,7 +11,6 @@ app.use(express.json());
 
 
 // STATIC ROUTES
-app.use('/assets', express.static('hamsters'));
 app.use(express.static('public'));
 
 // ROUTE MODULES IMPORT
@@ -33,7 +32,7 @@ app.use('/stats', statsRoute);
 // AUTH
 app.use((req,res,next) => {
     // Serve public folder
-    if(req.url === '/' || req.url === '/assets'){
+    if(req.url === '/'){
         next();
 
     }else{
