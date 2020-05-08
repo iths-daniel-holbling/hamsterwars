@@ -7,6 +7,22 @@ const router = new Router();
 
 // GET
 
+// Array of all hamsters
+router.get('/', async (req,res) => {
+    // Empty array for response
+    let hamsterArr = [];
+
+    // Get all hamsters from firebase
+    let hamsters = await db
+    .collection('hamsters')
+    .get();
+
+    // Push each hamster into array
+    hamsters.forEach(hamster => hamsterArr.push(hamster.data()));
+
+    // Respond with array of all hamsters
+    res.status(200).send(hamsterArr);
+})
 
 
 
