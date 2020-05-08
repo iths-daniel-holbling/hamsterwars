@@ -2,8 +2,14 @@
 const { Router } = require('express');
 const { auth, db } = require('./../firebase');
 
+
+
+
 // Init new router
 const router = new Router();
+
+
+
 
 // GET
 
@@ -23,6 +29,19 @@ router.get('/', async (req,res) => {
     // Respond with array of all hamsters
     res.status(200).send(hamsterArr);
 })
+
+// Specific hamster
+router.get('/:id', async (req,res) => {
+    // Get hamster from firebase
+    let hamster = await db
+    .collection('hamsters')
+    .doc(req.params.id)
+    .get()
+
+    // Respond with chosen hamster
+    res.status(200).send(hamster.data());
+})
+
 
 
 
@@ -65,13 +84,7 @@ router.post('/', async (req,res) => {
 
 
 
-
 // PUT
-
-
-
-
-
 
 
 
