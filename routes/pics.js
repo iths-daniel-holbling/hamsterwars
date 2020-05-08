@@ -4,10 +4,15 @@ const { db, storage } = require('./../firebase');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
 
+
+
 // Init new router
 const router = new Router();
 
 
+
+// MIDDLEWARE
+// Use express-fileupload
 router.use(fileUpload({
     createParentPath: true
 }))
@@ -15,6 +20,7 @@ router.use(fileUpload({
 
 
 // GET
+// Get file from cloud storage
 router.get('/:filename', async (req,res) => {
     // Get buffer from storage bucket on firebase
     let pic = await storage.bucket().file(`hamster-pics/${req.params.filename}`).download();
