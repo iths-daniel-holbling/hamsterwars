@@ -2,12 +2,16 @@
 const { Router } = require('express');
 const { auth, db } = require('./../firebase');
 
+
+
+
 // Init new router
 const router = new Router();
 
+
+
+
 // GET
-
-
 
 
 
@@ -17,14 +21,7 @@ const router = new Router();
 
 
 
-
-
 // PUT
-
-
-
-
-
 
 
 
