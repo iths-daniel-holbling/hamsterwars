@@ -13,6 +13,24 @@ const router = new Router();
 
 // GET
 
+// Random hamster
+router.get('/random', async (req,res) => {
+        // Array to perform random on
+        let hamsterArr = [];
+    
+        // Get all hamsters from firebase
+        let hamsters = await db
+        .collection('hamsters')
+        .get();
+    
+        // Push each hamster into array
+        hamsters.forEach(hamster => hamsterArr.push(hamster.data()));
+    
+        // Return a random hamster
+        res.status(200).send(hamsterArr[Math.floor(Math.random()*hamsterArr.length)]);
+    
+});
+
 // Array of all hamsters
 router.get('/', async (req,res) => {
     // Empty array for response
@@ -28,7 +46,7 @@ router.get('/', async (req,res) => {
 
     // Respond with array of all hamsters
     res.status(200).send(hamsterArr);
-})
+});
 
 // Specific hamster
 router.get('/:id', async (req,res) => {
@@ -42,28 +60,7 @@ router.get('/:id', async (req,res) => {
         // Respond with chosen hamster
         res.status(200).send(hamster.data());
     })
-})
-
-// Random hamster
-router.get('/random', async (req,res) => {
-        // Array to perform random on
-        let hamsterArr = [];
-    
-        // Get all hamsters from firebase
-        let hamsters = await db
-        .collection('hamsters')
-        .get();
-    
-        // Push each hamster into array
-        hamsters.forEach(hamster => console.log(hamster.data()));
-    
-    
-        // Return a random hamster
-        res.status(200).send(hamsterArr[Math.floor(Math.random()*hamsterArr.length)]);
-    
 });
-
-
 
 
 
@@ -73,7 +70,7 @@ router.get('/random', async (req,res) => {
 // New hamster
 router.post('/', async (req,res) => {
     if(!!req.headers['multiple']){
-        // Array of hamster objects, set header key "Multiple" to truthy
+        // Array of hamster objects, set request header {"Multiple":true}
         req.body.forEach(async (hamster) => {
             console.log(`New hamster "${hamster.name}" created.`)
             await db
@@ -94,13 +91,13 @@ router.post('/', async (req,res) => {
         .collection('hamsters')
         .doc()
         .set(req.body)
-        .catch(err => console.error(err))
+        .catch(err => console.error(err));
     
         res.status(201).send({
             msg: "New hamster created."
-        })
+        });
     }
-})
+});
 
 
 
