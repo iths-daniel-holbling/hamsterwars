@@ -1,0 +1,30 @@
+{
+  "name": "hamsterwars",
+  "version": "1.0.0",
+  "description": "School assignment to build an api for a spinoff on Kittenwar. 2 images (of hamsters) are randomly selected and the audience votes for the cutest. Points shall be counted, lists shall be made. Meant to be used in the next assignment, which is to build the frontend in react.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iths-daniel-holbling/hamsterwars.git"
+  },
+  "keywords": [
+    "hamsterwars",
+    "rest",
+    "api",
+    "funny"
+  ],
+  "author": "Daniel Hölbling <daniel.holbling@gmail.com> (https://github.com/iths-daniel-holbling)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iths-daniel-holbling/hamsterwars/issues"
+  },
+  "homepage": "https://github.com/iths-daniel-holbling/hamsterwars#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "firebase-admin": "^8.12.0"
+  }
+}
