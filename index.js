@@ -1,5 +1,6 @@
 // IMPORTS
 const express = require('express');
+require('dotenv').config()
 const { auth, db } = require('./firebase');
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 
 // STATIC ROUTES
 app.use('/assets', express.static('hamsters'));
+app.use(express.static('public'));
 
 // ROUTE MODULES IMPORT
 const chartsRoute = require('./routes/charts');
@@ -33,14 +35,15 @@ app.use((req,res,next) => {
     if(req.url === '/' || req.url === '/assets'){
         next();
 
-    // Else confirm API key
     }else{
+        // Check API key
         if(req.headers['authorization'] === process.env.API_KEY){
             console.log('API Key verified.');
             next();
+
         }else{
             // Reject if no match
-            res.status(500).send({
+            res.status(401).send({
                 msg: 'API Key mismatch.'
             })
         }
