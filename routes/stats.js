@@ -2,8 +2,14 @@
 const { Router } = require('express');
 const { db } = require('./../firebase');
 
+
+
+
 // Init new router
 const router = new Router();
+
+
+
 
 // GET
 
@@ -44,7 +50,11 @@ router.get('/extended', async (req,res) => {
     });
 })
 
+
+
+
 // Helper functions
+
 function averageAge(hamsters){
     let output = 0;
     hamsters.forEach(hamster => {
@@ -67,6 +77,9 @@ function favFoods(hamsters){
     })
     return output;
 }
+
+
+
 
 // EXPORTS
 module.exports = router;

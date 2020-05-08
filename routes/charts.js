@@ -2,8 +2,14 @@
 const { Router } = require('express');
 const { db } = require('./../firebase');
 
+
+
+
 // Init new router
 const router = new Router();
+
+
+
 
 // GET
 
@@ -44,23 +50,6 @@ router.get('/bottom', async (req,res) => {
     // Respond with hamsterArr
     res.send(hamsterArr);
 })
-
-
-
-
-// POST
-
-
-
-
-
-
-// PUT
-
-
-
-
-
 
 
 

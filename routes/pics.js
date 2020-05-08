@@ -12,14 +12,16 @@ const router = new Router();
 
 
 // MIDDLEWARE
+
 // Use express-fileupload
 router.use(fileUpload({
     createParentPath: true
-}))
+}));
 
 
 
 // GET
+
 // Get file from cloud storage
 router.get('/:filename', async (req,res) => {
     // Get buffer from storage bucket on firebase
@@ -36,13 +38,14 @@ router.get('/:filename', async (req,res) => {
 
 
 // POST
+
 // Upload picture to hamster-pics on cloud storage
 router.post('/', async (req,res) => {
     // set incoming file to pic
     let pic = req.files.pic;
 
     // Move the file to 
-    pic.mv('./uploads/' + pic.name)
+    pic.mv('./uploads/' + pic.name);
 
     console.log(`File upload: \nFilename: ${pic.name}\nMimetype: ${pic.mimetype}\nSize: ${pic.size}`);
 
@@ -58,16 +61,6 @@ router.post('/', async (req,res) => {
     // Tell client that all is good
     res.status(200).send({msg: `File ${pic.name} uploaded.`});
 })
-
-
-
-// PUT
-
-
-
-
-
-
 
 
 

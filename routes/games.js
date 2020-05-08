@@ -55,10 +55,6 @@ router.post('/', async (req,res) => {
 
 
 
-// PUT
 
-
-
-
-{// EXPORTS
-module.exports = router;}
+// EXPORTS
+module.exports = router;

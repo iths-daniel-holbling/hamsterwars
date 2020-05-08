@@ -55,7 +55,9 @@ router.get('/:id', async (req,res) => {
     .collection('hamsters')
     .where("id","==",req.params.id*1)
     .get()
+    .catch(err => console.error(err));
 
+    // Loop over the array, since it's only one index we can respond right away
     hamsters.forEach(hamster => {
         // Respond with chosen hamster
         res.status(200).send(hamster.data());
@@ -78,8 +80,8 @@ router.post('/', async (req,res) => {
             .doc()
             .set(hamster)
             .catch(err => console.error(err));
-
         });
+
         res.status(201).send({
             msg: "New hamsters created."
         })
@@ -93,6 +95,7 @@ router.post('/', async (req,res) => {
         .set(req.body)
         .catch(err => console.error(err));
     
+        // Respond with OK and msg
         res.status(201).send({
             msg: "New hamster created."
         });
@@ -114,7 +117,7 @@ router.put('/:id/result', async (req,res) => {
         let hamsters = await db
         .collection('hamsters')
         .where("id","==",req.params.id*1)
-        .get()
+        .get();
 
         // Loop over the array returned from firestore
         hamsters.forEach(doc => {
@@ -132,10 +135,13 @@ router.put('/:id/result', async (req,res) => {
         }
 
         // PUT the data
-        await db.collection('hamsters').doc(hamster.fbId).update(updateData);
+        await db
+        .collection('hamsters')
+        .doc(hamster.fbId)
+        .update(updateData);
 
         // Send "all is ok" to client
-        res.status(200).send({msg:"Hamster updated."})
+        res.status(200).send({msg:"Hamster updated."});
 
     }
     catch(err){
